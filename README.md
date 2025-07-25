@@ -22,7 +22,8 @@ A futuristic, neon-styled image gallery with upload, delete, favorite, and viewe
 
 ## 📸 Preview
 
-![screenshot](screenshot.png) <!-- Add a screenshot here if available -->
+![screenshot](image_2025-07-25_155319998.png
+)
 
 ## 🛠️ Setup
 
