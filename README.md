@@ -1,6 +1,6 @@
 ## Neon Gallery V1 🌌
 
-A futuristic, neon-styled image gallery with upload, delete, favorite, and viewer features powered by Appwrite.
+A futuristic, neon-styled image gallery with upload, delete, favorite, and viewer features powered by Appwrite. Also inspired by Tron: Legacy and Tron: ARES
 
 ## 🚀 Features
 
@@ -22,6 +22,8 @@ A futuristic, neon-styled image gallery with upload, delete, favorite, and viewe
 
 ## 📸 Preview
 
+![screenshot](image_2025-07-25_155319998.png
+)
 ![screenshot](image_2025-07-25_155319998.png
 )
 
