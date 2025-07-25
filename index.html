@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neon Image Gallery</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <header>
+    <h1 class="neon-text">Neon Gallery</h1>
+    <button id="toggle-theme" class="neon-button">🌗</button>
+    <button id="toggle-favorites" class="neon-button">
+      <i class="fas fa-heart"></i> Show Favorites
+    </button>
+  </header>
+
+  <section class="upload-section">
+    <label class="upload-btn neon-button">
+      Upload Image
+      <input type="file" id="image-input" accept="image/*" hidden />
+    </label>
+    <div class="progress-bar" id="progress-bar"></div>
+  </section>
+
+  <section class="gallery" id="gallery"></section>
+
+  <div id="viewer" class="viewer">
+    <span id="close-viewer">&times;</span>
+    <img id="viewer-image" src="" alt="Full View" />
+    <div id="viewer-info" class="upload-info"></div> <!-- ✅ Upload date display -->
+  </div>
+
+  <div class="circle"></div>
+
+  <button id="audio-toggle" class="neon-audio-button" title="Toggle Music">🔊</button>
+
+  <audio id="bg-music" loop autoplay>
+    <source src="music/Cinematic.mp4" type="audio/mp4" />
+  </audio>
+
+  <script src="/main.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.1"></script>
+
+</body>
+</html>
