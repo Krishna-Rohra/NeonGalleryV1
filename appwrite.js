@@ -6,14 +6,14 @@ const client = new Client()
 
 const storage = new Storage(client);
 
-// ✅ Upload image with public read permission
+// Upload image with public read permission
 export async function uploadImage(file) {
   try {
     const uploaded = await storage.createFile(
       import.meta.env.VITE_APPWRITE_BUCKET_ID,
       ID.unique(),
       file,
-      [Permission.read(Role.any())] // Publicly readable
+      [Permission.read(Role.any())]
     );
     return uploaded;
   } catch (err) {
@@ -22,7 +22,7 @@ export async function uploadImage(file) {
   }
 }
 
-// ✅ Fetch all files from the bucket
+// Fetch all files from the bucket
 export async function fetchImages() {
   try {
     const res = await storage.listFiles(import.meta.env.VITE_APPWRITE_BUCKET_ID);
@@ -33,12 +33,12 @@ export async function fetchImages() {
   }
 }
 
-// ✅ Get image preview URL
+// Get image preview URL
 export function getImagePreview(id) {
   return `${import.meta.env.VITE_APPWRITE_ENDPOINT}/storage/buckets/${import.meta.env.VITE_APPWRITE_BUCKET_ID}/files/${id}/view?project=${import.meta.env.VITE_APPWRITE_PROJECT_ID}`;
 }
 
-// ✅ Delete file
+// Delete file
 export async function deleteImage(id) {
   try {
     return await storage.deleteFile(import.meta.env.VITE_APPWRITE_BUCKET_ID, id);

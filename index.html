@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Neon Image Gallery</title>
+  <title>Neon Gallery</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
@@ -25,7 +25,7 @@
 
   <header>
     <h1 class="neon-text">Neon Gallery</h1>
-    <button id="toggle-theme" class="neon-button">🌗</button>
+    <button id="toggle-theme" class="neon-button">Mode</button>
     <button id="toggle-favorites" class="neon-button">
       <i class="fas fa-heart"></i> Show Favorites
     </button>
@@ -45,7 +45,7 @@
   <div id="viewer" class="viewer">
     <span id="close-viewer">&times;</span>
     <img id="viewer-image" src="" alt="Full View" />
-    <div id="viewer-info" class="upload-info"></div> <!-- ✅ Upload date display -->
+    <div id="viewer-info" class="upload-info"></div>
   </div>
 
   <div class="circle"></div>
@@ -53,16 +53,16 @@
   <button id="audio-toggle" class="neon-audio-button" title="Toggle Music">🔊</button>
 
   <audio id="bg-music" loop autoplay>
-    <source src="music/Cinematic.mp4" type="audio/mp4" />
+    <source src="music/Cinematic.mp3" type="audio/mp3" />
   </audio>
 
   <footer class="footer">
-  <p>© 2025 Neon Gallery — Crafted with ⚡ by <strong>PixelForgeStudio</strong></p>
+  <p>© 2025 Neon Gallery Crafted by <strong>Krishna-Rohra</strong></p>
   <div class="footer-links">
     <a href="https://github.com/Krishna-Rohra" target="_blank" title="View on GitHub">
       <i class="fab fa-github"></i>
     </a>
-    <a href="#" title="Coming Soon">
+    <a href="https://www.instagram.com/aispiredkris_" title="Meet the Creator">
       <i class="fab fa-instagram"></i>
     </a>
   </div>
@@ -73,13 +73,17 @@
   <script src="/main.js" type="module"></script>
   <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.1"></script>
   <script type="module">
-  import { Client, Account, ID } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.1/+esm";
+  import { Client, Account, ID, Databases } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.1/+esm";
 
   const client = new Client()
     .setEndpoint("https://fra.cloud.appwrite.io/v1")
-    .setProject("6882e805002bd0c5774e"); // <-- replace with your real project ID
+    .setProject("6882e805002bd0c5774e"); //appwrite project ID
 
   const account = new Account(client);
+  const databases = new Databases(client);
+  const databaseId = "68849f720019212ead42";
+  const collectionId = "68849f8b00099ee3eb91";
+
   let currentUser = null;
 
   function showDashboard() {
@@ -116,8 +120,22 @@
     const password = document.getElementById("password").value;
 
     try {
-      await account.create(ID.unique(), email, password, name);
+      const user = await account.create(ID.unique(), email, password, name);
       await login(email, password);
+
+      const userDoc = await databases.createDocument(
+        databaseId,
+        collectionId,
+        ID.unique(),
+        {
+          name: name,
+          email: email,
+          userID: user.$id,
+          imgeURL: "https://source.unsplash.com/random/300x300?profile" 
+        }
+      );
+
+      console.log("User document created:", userDoc);
     } catch (err) {
       alert("Signup failed: " + err.message);
       console.error(err);
@@ -150,6 +168,7 @@
     }
   })();
 </script>
+
 
 </body>
 </html>

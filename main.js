@@ -17,14 +17,14 @@ const circleElement = document.querySelector(".circle");
 const music = document.getElementById("bg-music");
 const toggleBtn = document.getElementById("audio-toggle");
 
-// 👇 Viewer upload time
+// Viewer upload time
 const viewerTime = document.createElement("div");
 viewerTime.className = "viewer-time";
 viewer.appendChild(viewerTime);
 
 let showOnlyFav = false;
 
-// ✅ Upload handler
+// Upload handler
 input.addEventListener("change", async (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -51,7 +51,7 @@ input.addEventListener("change", async (e) => {
   reader.readAsDataURL(file);
 });
 
-// ✅ Gallery renderer
+// Gallery renderer
 async function renderGallery() {
   try {
     const files = await fetchImages();
@@ -79,8 +79,8 @@ async function renderGallery() {
           <div class="upload-time">Uploaded: ${uploadedDate}</div>
         </div>
         <div class="controls">
-          <span data-del="${file.$id}" title="Delete">🗑️</span>
-          <span data-fav="${file.$id}" title="Favorite">❤️</span>
+          <span data-del="${file.$id}" title="Delete">Del</span>
+          <span data-fav="${file.$id}" title="Favorite">Fav</span>
         </div>
       `;
       gallery.appendChild(div);
@@ -90,7 +90,7 @@ async function renderGallery() {
   }
 }
 
-// ✅ Image Viewer, Deletion & Favorites
+// Image Viewer, Deletion & Favorites
 gallery.addEventListener("click", async (e) => {
   const delId = e.target.dataset.del;
   const favId = e.target.dataset.fav;
@@ -112,7 +112,7 @@ gallery.addEventListener("click", async (e) => {
   }
 });
 
-// ✅ Viewer function
+// Viewer function
 function showImageInViewer(src, time) {
   viewerImg.src = src;
   viewerTime.textContent = time ? `Uploaded: ${time}` : "";
@@ -125,30 +125,30 @@ closeViewer.addEventListener("click", () => {
   viewerTime.textContent = "";
 });
 
-// ✅ Theme toggle
+// Theme toggle
 themeBtn.addEventListener("click", () => {
   document.body.classList.toggle("light");
 });
 
-// ✅ Favorites toggle
+// Favorites toggle
 favBtn.addEventListener("click", () => {
   showOnlyFav = !showOnlyFav;
-  favBtn.textContent = showOnlyFav ? "❤️ Favorites" : "📁 All";
+  favBtn.textContent = showOnlyFav ? " Favorites" : " All";
   renderGallery();
 });
 
-// ✅ Audio Toggle
+// Audio Toggle
 toggleBtn.addEventListener("click", () => {
   if (music.paused) {
     music.play();
-    toggleBtn.textContent = "🔊";
+    toggleBtn.textContent = "Play";
   } else {
     music.pause();
-    toggleBtn.textContent = "🔇";
+    toggleBtn.textContent = "Pause";
   }
 });
 
-// ✅ Custom Cursor Animation
+// Custom Cursor Animation
 const mouse = { x: 0, y: 0 };
 const previousMouse = { x: 0, y: 0 };
 const circle = { x: 0, y: 0 };
