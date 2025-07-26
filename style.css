@@ -26,6 +26,39 @@ background-color: var(--light-bg);
 color: var(--light-fg);
 --highlight: var(--highlight-light);
 }
+
+.auth-container {
+  text-align: center;
+  margin-top: 5rem;
+  padding: 2rem;
+}
+
+.auth-container input {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  border: 2px solid var(--highlight);
+  background-color: var(--secondary);
+  color: var(--fg);
+  font-family: 'Orbitron', sans-serif;
+  width: 250px;
+  border-radius: 5px;
+}
+
+.auth-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+header,
+.upload-section,
+#gallery {
+  display: none;
+}
+
+
 header {
 display: flex;
 justify-content: space-between;
@@ -73,7 +106,7 @@ cursor: none;
 width: 0%;
 height: 5px;
 background-color: var(--accent);
-margin-top: 0.5rem;
+margin-top: 0.7rem;
 transition: width 0.3s ease;
 }
 
@@ -298,4 +331,44 @@ margin-left: 0;
   background: rgba(0, 0, 0, 0.5);
   padding: 4px 10px;
   border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header > div {
+    flex-wrap: wrap;
+  }
+}
+
+.footer {
+  background-color: var(--secondary);
+  color: var(--highlight);
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  border-top: 2px solid var(--highlight);
+  box-shadow: 0 -4px 10px rgba(0, 255, 247, 0.2);
+  margin-top: 2rem;
+  text-shadow: 0 0 5px var(--highlight);
+}
+
+.footer-links {
+  margin-top: 0.5rem;
+}
+
+.footer-links a {
+  color: var(--highlight);
+  margin: 0 0.5rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent);
 }

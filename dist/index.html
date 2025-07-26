@@ -7,16 +7,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script type="module" crossorigin src="/NeonGalleryV1/assets/index-CCfk0-C-.js"></script>
-  <link rel="stylesheet" crossorigin href="/NeonGalleryV1/assets/index-DrCaabKd.css">
+  <script type="module" crossorigin src="./assets/index-B0721F85.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DnZhFfJO.css">
 </head>
 <body>
+
+  <!-- Auth Section -->
+<div id="auth-section" class="auth-container">
+  <h2 class="neon-text">Welcome to Neon Gallery</h2>
+  <input type="text" id="name" placeholder="Name (Sign Up Only)" />
+  <input type="email" id="email" placeholder="Email" />
+  <input type="password" id="password" placeholder="Password" />
+  <div class="auth-buttons">
+    <button id="signup" class="neon-button">Sign Up</button>
+    <button id="login" class="neon-button">Login</button>
+  </div>
+</div>
+
   <header>
     <h1 class="neon-text">Neon Gallery</h1>
     <button id="toggle-theme" class="neon-button">🌗</button>
     <button id="toggle-favorites" class="neon-button">
       <i class="fas fa-heart"></i> Show Favorites
     </button>
+    <button id="logout-btn" class="neon-button" style="display:none;">Logout</button>
   </header>
 
   <section class="upload-section">
@@ -40,10 +54,24 @@
   <button id="audio-toggle" class="neon-audio-button" title="Toggle Music">🔊</button>
 
   <audio id="bg-music" loop autoplay>
-    <source src="/NeonGalleryV1/assets/Cinematic-DyvNjQ99.mp4" type="audio/mp4" />
+    <source src="./assets/Cinematic-DyvNjQ99.mp4" type="audio/mp4" />
   </audio>
+
+  <footer class="footer">
+  <p>© 2025 Neon Gallery — Crafted with ⚡ by <strong>PixelForgeStudio</strong></p>
+  <div class="footer-links">
+    <a href="https://github.com/Krishna-Rohra" target="_blank" title="View on GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="#" title="Coming Soon">
+      <i class="fab fa-instagram"></i>
+    </a>
+  </div>
+</footer>
+
+
 
-  <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.1"></script>
 
 </body>
 </html>

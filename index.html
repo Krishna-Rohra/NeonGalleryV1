@@ -10,12 +10,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
+
+  <!-- Auth Section -->
+<div id="auth-section" class="auth-container">
+  <h2 class="neon-text">Welcome to Neon Gallery</h2>
+  <input type="text" id="name" placeholder="Name (Sign Up Only)" />
+  <input type="email" id="email" placeholder="Email" />
+  <input type="password" id="password" placeholder="Password" />
+  <div class="auth-buttons">
+    <button id="signup" class="neon-button">Sign Up</button>
+    <button id="login" class="neon-button">Login</button>
+  </div>
+</div>
+
   <header>
     <h1 class="neon-text">Neon Gallery</h1>
     <button id="toggle-theme" class="neon-button">🌗</button>
     <button id="toggle-favorites" class="neon-button">
       <i class="fas fa-heart"></i> Show Favorites
     </button>
+    <button id="logout-btn" class="neon-button" style="display:none;">Logout</button>
   </header>
 
   <section class="upload-section">
@@ -42,8 +56,100 @@
     <source src="music/Cinematic.mp4" type="audio/mp4" />
   </audio>
 
+  <footer class="footer">
+  <p>© 2025 Neon Gallery — Crafted with ⚡ by <strong>PixelForgeStudio</strong></p>
+  <div class="footer-links">
+    <a href="https://github.com/Krishna-Rohra" target="_blank" title="View on GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="#" title="Coming Soon">
+      <i class="fab fa-instagram"></i>
+    </a>
+  </div>
+</footer>
+
+
+
   <script src="/main.js" type="module"></script>
   <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.1"></script>
+  <script type="module">
+  import { Client, Account, ID } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.1/+esm";
+
+  const client = new Client()
+    .setEndpoint("https://fra.cloud.appwrite.io/v1")
+    .setProject("68832888001231497d2f"); // <-- replace with your real project ID
+
+  const account = new Account(client);
+  let currentUser = null;
+
+  function showDashboard() {
+    document.getElementById("auth-section").style.display = "none";
+    document.getElementById("logout-btn").style.display = "block";
+    document.querySelector("header").style.display = "flex";
+    document.querySelector(".upload-section").style.display = "block";
+    document.getElementById("gallery").style.display = "grid";
+  }
+
+  function hideDashboard() {
+    document.getElementById("auth-section").style.display = "block";
+    document.getElementById("logout-btn").style.display = "none";
+    document.querySelector("header").style.display = "none";
+    document.querySelector(".upload-section").style.display = "none";
+    document.getElementById("gallery").style.display = "none";
+  }
+
+  async function login(email, password) {
+    try {
+      await account.createEmailSession(email, password);
+      currentUser = await account.get();
+      showDashboard();
+      console.log("Logged in:", currentUser);
+    } catch (err) {
+      alert("Login failed");
+      console.error(err);
+    }
+  }
+
+  document.getElementById("signup").onclick = async () => {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+      await account.create(ID.unique(), email, password, name);
+      await login(email, password);
+    } catch (err) {
+      alert("Signup failed: " + err.message);
+      console.error(err);
+    }
+  };
+
+  document.getElementById("login").onclick = async () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    await login(email, password);
+  };
+
+  document.getElementById("logout-btn").onclick = async () => {
+    try {
+      await account.deleteSession("current");
+      location.reload();
+    } catch (err) {
+      alert("Logout failed");
+      console.error(err);
+    }
+  };
+
+  // Auto-login check
+  (async () => {
+    try {
+      currentUser = await account.get();
+      showDashboard();
+    } catch {
+      hideDashboard();
+    }
+  })();
+</script>
 
 </body>
 </html>
