@@ -8,26 +8,23 @@ import {
 const input = document.getElementById("image-input");
 const gallery = document.getElementById("gallery");
 const progressBar = document.getElementById("progress-bar");
-const favBtn = document.getElementById("toggle-favorites");
 const themeBtn = document.getElementById("toggle-theme");
-const logoutBtn = document.getElementById("logout-btn");
+const favBtn = document.getElementById("toggle-favorites");
 const viewer = document.getElementById("viewer");
 const viewerImg = document.getElementById("viewer-image");
 const closeViewer = document.getElementById("close-viewer");
 const circleElement = document.querySelector(".circle");
 const music = document.getElementById("bg-music");
 const toggleBtn = document.getElementById("audio-toggle");
-const footer = document.querySelector("footer");
-const menuToggle = document.getElementById("menu-toggle");
-const dropdown = document.getElementById("dropdown");
 
+// 👇 Viewer upload time
 const viewerTime = document.createElement("div");
 viewerTime.className = "viewer-time";
 viewer.appendChild(viewerTime);
 
 let showOnlyFav = false;
 
-// Upload handler
+// ✅ Upload handler
 input.addEventListener("change", async (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -54,7 +51,7 @@ input.addEventListener("change", async (e) => {
   reader.readAsDataURL(file);
 });
 
-// Render gallery
+// ✅ Gallery renderer
 async function renderGallery() {
   try {
     const files = await fetchImages();
@@ -64,7 +61,7 @@ async function renderGallery() {
       const isFav = localStorage.getItem(`fav-${file.$id}`) === "true";
       if (showOnlyFav && !isFav) return;
 
-      const imgURL = getImagePreview(file.$id) + `&project=${import.meta.env.VITE_APPWRITE_PROJECT_ID}`;
+      const imgURL = getImagePreview(file.$id);
 
       let uploadedDate = "Unknown";
       try {
@@ -78,8 +75,7 @@ async function renderGallery() {
       div.className = "image-card";
       div.innerHTML = `
         <div class="image-wrapper">
-          <img loading="lazy" src="${imgURL}" alt="${file.name}" data-id="${file.$id}" data-time="${uploadedDate}" />
-
+          <img src="${imgURL}" alt="${file.name}" data-id="${file.$id}" data-time="${uploadedDate}" />
           <div class="upload-time">Uploaded: ${uploadedDate}</div>
         </div>
         <div class="controls">
@@ -94,7 +90,7 @@ async function renderGallery() {
   }
 }
 
-// Viewer, delete, favorites
+// ✅ Image Viewer, Deletion & Favorites
 gallery.addEventListener("click", async (e) => {
   const delId = e.target.dataset.del;
   const favId = e.target.dataset.fav;
@@ -116,6 +112,7 @@ gallery.addEventListener("click", async (e) => {
   }
 });
 
+// ✅ Viewer function
 function showImageInViewer(src, time) {
   viewerImg.src = src;
   viewerTime.textContent = time ? `Uploaded: ${time}` : "";
@@ -128,19 +125,19 @@ closeViewer.addEventListener("click", () => {
   viewerTime.textContent = "";
 });
 
-// Theme toggle
+// ✅ Theme toggle
 themeBtn.addEventListener("click", () => {
   document.body.classList.toggle("light");
 });
 
-// Favorites toggle
+// ✅ Favorites toggle
 favBtn.addEventListener("click", () => {
   showOnlyFav = !showOnlyFav;
-  favBtn.innerHTML = showOnlyFav ? "❤️ Favorites" : "📁 All";
+  favBtn.textContent = showOnlyFav ? "❤️ Favorites" : "📁 All";
   renderGallery();
 });
 
-// Audio toggle
+// ✅ Audio Toggle
 toggleBtn.addEventListener("click", () => {
   if (music.paused) {
     music.play();
@@ -151,7 +148,7 @@ toggleBtn.addEventListener("click", () => {
   }
 });
 
-// Custom cursor
+// ✅ Custom Cursor Animation
 const mouse = { x: 0, y: 0 };
 const previousMouse = { x: 0, y: 0 };
 const circle = { x: 0, y: 0 };
@@ -190,26 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   tick();
-});
-
-// Menu toggle for dropdown
-menuToggle?.addEventListener("click", () => {
-  dropdown?.classList.toggle("hidden");
-});
-
-// Logout
-logoutBtn?.addEventListener("click", async () => {
-  try {
-    const { Account } = await import("https://cdn.jsdelivr.net/npm/appwrite@13.0.1/+esm");
-    const { client } = await import("./appwrite.js");
-    const account = new Account(client);
-    await account.deleteSession("current");
-    localStorage.clear();
-    location.reload();
-  } catch (err) {
-    alert("Logout failed");
-    console.error(err);
-  }
 });
 
 renderGallery();

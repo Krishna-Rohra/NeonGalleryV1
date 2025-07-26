@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Appwrite Login Test</title>
+  <script type="module">
+    import { Client, Account } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.1/+esm";
+
+    const client = new Client()
+      .setEndpoint("https://fra.cloud.appwrite.io/v1")
+      .setProject("68832888001231497d2f");
+
+    const account = new Account(client);
+
+    account.createEmailSession("krishnarohra007@gmail.com", "abcd12345")
+      .then(res => console.log("✅ Login Success:", res))
+      .catch(err => console.error("❌ Login Failed:", err.message, err));
+  </script>
+</head>
+<body>
+  <h2>Check the browser console for result</h2>
+</body>
+</html>
