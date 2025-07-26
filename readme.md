@@ -1,6 +1,6 @@
-# Neon Gallery V1 🌌
+## Neon Gallery V1 🌌
 
-A futuristic, neon-styled image gallery with upload, delete, favorite, and viewer features powered by Appwrite.
+A futuristic, neon-styled image gallery with upload, delete, favorite, and viewer features powered by Appwrite. Also inspired by Tron: Legacy and Tron: ARES
 
 ## 🚀 Features
 
@@ -22,7 +22,10 @@ A futuristic, neon-styled image gallery with upload, delete, favorite, and viewe
 
 ## 📸 Preview
 
-![screenshot]() <!-- Add a screenshot here if available -->
+![screenshot](image_2025-07-25_155319998.png
+)
+![screenshot](image_2025-07-25_155856259.png
+)
 
 ## 🛠️ Setup
 
@@ -33,3 +36,13 @@ A futuristic, neon-styled image gallery with upload, delete, favorite, and viewe
    `npm install`
 
 3. Set up `.env` file  
+VITE_APPWRITE_ENDPOINT=your-endpoint
+VITE_APPWRITE_PROJECT_ID=your-project-id
+VITE_APPWRITE_BUCKET_ID=your-bucket-id
+
+4. Run the dev server  
+`npm run dev`
+
+## 📝 License
+
+This project is licensed under the MIT License
